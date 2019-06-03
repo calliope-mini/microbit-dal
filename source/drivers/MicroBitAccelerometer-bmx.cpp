@@ -58,7 +58,6 @@ int MicroBitAccelerometer::configure()
 {
     // BMX_DEBUG("RUN BMX055 start\r\n");
 
-    id =    BMX055_ACC_ADDRESS<<1;
     wait_ms(100);
 
     i2c.start();
