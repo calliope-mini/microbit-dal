@@ -393,7 +393,7 @@ void CalliopeSoundMotor::motorBOn(uint8_t duty_percent)
     motor_AB_current_use |= 0x02;
 
     //values for duty cycle 0
-    if(uint8_t(duty_motor_B_percent/2) == 0 || (motor_AB_current_use == 0x02)) {
+    if(uint8_t(duty_motor_A_percent/2) == 0 || (motor_AB_current_use == 0x02)) {
         nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_IN1);
         nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_IN2);
     }
