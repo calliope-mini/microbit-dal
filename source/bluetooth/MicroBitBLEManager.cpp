@@ -643,7 +643,7 @@ void MicroBitBLEManager::pairingMode(MicroBitDisplay &display, MicroBitButton &a
 {
     // Do not page this fiber!
     currentFiber->flags |= MICROBIT_FIBER_FLAG_DO_NOT_PAGE;
-
+        
     ManagedString namePrefix("Calliope mini [");
     ManagedString namePostfix("]");
     ManagedString BLEName = namePrefix + deviceName + namePostfix;
