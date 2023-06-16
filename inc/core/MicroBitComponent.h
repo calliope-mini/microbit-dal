@@ -64,14 +64,19 @@ und Björn Eberhardt GbR by arrangement with Calliope GbR.
 #define MICROBIT_ID_IO_P13              113         //SCK
 #define MICROBIT_ID_IO_P14              114         //MISO
 #define MICROBIT_ID_IO_P15              115         //MOSI
-#define MICROBIT_ID_IO_P16              116         //PIN 16 (CM: P3)
-#define MICROBIT_ID_IO_P17              117         //
 #define MICROBIT_ID_IO_P18              118         //
-#define MICROBIT_ID_IO_P19              119         //SCL
-#define MICROBIT_ID_IO_P20              120         //SDA
-#ifdef TARGET_NRF51_CALLIOPE
-#define MICROBIT_ID_LOGO              121 // MIC/P21        // CM: analog microphone
-#endif
+// #ifdef TARGET_NRF51_CALLIOPE
+#define MICROBIT_ID_IO_A1RX             116
+#define MICROBIT_ID_IO_A1TX             117
+#define MICROBIT_ID_IO_A1SDA            119
+#define MICROBIT_ID_IO_A1SCL            120
+#define MICROBIT_ID_LOGO                121 // MIC/P21        // CM: analog microphone
+// #else
+// #define MICROBIT_ID_IO_P16              116         //PIN 16 (CM: P3)
+// #define MICROBIT_ID_IO_P17              117         //
+// #define MICROBIT_ID_IO_P19              119         //SCL
+// #define MICROBIT_ID_IO_P20              120         //SDA
+// #endif
 
 #define MICROBIT_ID_IO_INT1             130         //INT1
 #define MICROBIT_ID_IO_INT2             131         //INT2
