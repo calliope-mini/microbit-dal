@@ -91,10 +91,10 @@ class MicroBitIO
                int ID_P12,int ID_P13,int ID_P14,
                int ID_P15,
 // #ifdef TARGET_NRF51_CALLIOPE
-              int ID_A1RX,
-              int ID_A1TX,
               int ID_A0SCL,
               int ID_A0SDA,
+              int ID_A1RX,
+              int ID_A1TX,
               int ID_MIC
 // #else
 

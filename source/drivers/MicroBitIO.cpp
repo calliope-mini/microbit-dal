@@ -49,14 +49,15 @@ MicroBitIO::MicroBitIO(int ID_P0, int ID_P1, int ID_P2,
                        int ID_P6, int ID_P7, int ID_P8,
                        int ID_P9, int ID_P10,int ID_P11,
                        int ID_P12,int ID_P13,int ID_P14,
+                       int ID_P15,
 // #ifdef TARGET_NRF51_CALLIOPE
-                       int ID_A1RX,
-                       int ID_A1TX,
                        int ID_A0SCL,
                        int ID_A0SDA,
+                       int ID_A1RX,
+                       int ID_A1TX,
                        int ID_MIC
 // #else
-//                       int ID_P15,
+//                       
 //                       int ID_P16,
 //                       int ID_P19,
 //                       int ID_P20
@@ -92,7 +93,7 @@ MicroBitIO::MicroBitIO(int ID_P0, int ID_P1, int ID_P2,
     P13(ID_P13,MICROBIT_PIN_P5,PIN_CAPABILITY_STANDARD),
     /// P14(ID_P14,MICROBIT_PIN_P14,PIN_CAPABILITY_STANDARD),        //MISO
     P14(ID_P14,MICROBIT_PIN_P11,PIN_CAPABILITY_STANDARD),
-    /// P15(ID_P15,MICROBIT_PIN_P15,PIN_CAPABILITY_STANDARD),        //MOSI
+    P15(ID_P15,MICROBIT_PIN_P11,PIN_CAPABILITY_STANDARD),        //MOSI
     // /// P16(ID_P16,MICROBIT_PIN_P16,PIN_CAPABILITY_STANDARD),        //PIN 16 (CM: P3)
     // /// P19(ID_P19,MICROBIT_PIN_P19,PIN_CAPABILITY_STANDARD),        //SCL
     // /// P20(ID_P20,MICROBIT_PIN_P20,PIN_CAPABILITY_STANDARD)         //SDA
@@ -103,7 +104,7 @@ MicroBitIO::MicroBitIO(int ID_P0, int ID_P1, int ID_P2,
     A1TX (ID_A1TX,MICROBIT_PIN_P8,PIN_CAPABILITY_STANDARD),
     MICROPHONE(ID_MIC,MICROBIT_PIN_P21,PIN_CAPABILITY_ANALOG_IN)        // (CM: Microphone)
 // #else
-//   P15(ID_P15,MICROBIT_PIN_P19,PIN_CAPABILITY_STANDARD),
+//   
 //   P16(ID_P16,MICROBIT_PIN_P16,PIN_CAPABILITY_STANDARD),
 //   P19(ID_P19,MICROBIT_PIN_P19,PIN_CAPABILITY_STANDARD),
 //   P20(ID_P20,MICROBIT_PIN_P20,PIN_CAPABILITY_STANDARD) 
