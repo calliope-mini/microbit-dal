@@ -25,7 +25,7 @@ DEALINGS IN THE SOFTWARE.
 */
 
 
-#ifdef TARGET_NRF51_CALLIOPE
+// #ifdef TARGET_NRF51_CALLIOPE
 
 #ifndef CALLIOPE_SOUND_MOTOR_H
 #define CALLIOPE_SOUND_MOTOR_H
@@ -107,4 +107,4 @@ class CalliopeSoundMotor : public MicroBitComponent
 };
 
 #endif
-#endif // TARGET_NRF51_CALLIOPE
+// #endif // TARGET_NRF51_CALLIOPE
