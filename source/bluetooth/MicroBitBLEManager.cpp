@@ -783,18 +783,12 @@ void MicroBitBLEManager::showManagementModeAnimation(MicroBitDisplay &display)
     // Animation for display object
     // https://makecode.microbit.org/93264-81126-90471-58367
 
-    const uint8_t mgmt_animation[] __attribute__ ((aligned (4))) =
-    {
-         0xff, 0xff, 20, 0, 5, 0,
-         255,255,255,255,255,   255,255,255,255,255,   255,255,  0,255,255,   255,  0,  0,  0,255,
-         255,255,255,255,255,   255,255,  0,255,255,   255,  0,  0,  0,255,     0,  0,  0,  0,  0,
-         255,255,  0,255,255,   255,  0,  0,  0,255,     0,  0,  0,  0,  0,     0,  0,  0,  0,  0,
-         255,255,255,255,255,   255,255,  0,255,255,   255,  0,  0,  0,255,     0,  0,  0,  0,  0,
-         255,255,255,255,255,   255,255,255,255,255,   255,255,  0,255,255,   255,  0,  0,  0,255
-    };
+    for(int i=0; i < 255; i = i + 5){
+        display.setBrightness(255-i);
+        fiber_sleep(2);
+    }
 
-    MicroBitImage mgmt((ImageData*)mgmt_animation);
-    display.animate(mgmt,100,5);
+    display.clear();
 
     const uint8_t bt_icon_raw[] =
     {
@@ -810,9 +804,9 @@ void MicroBitBLEManager::showManagementModeAnimation(MicroBitDisplay &display)
 
     for(int i=0; i < 255; i = i + 5){
         display.setBrightness(i);
-        fiber_sleep(5);
+        fiber_sleep(2);
     }
-    fiber_sleep(1000);
+    fiber_sleep(300);
 
 }
 
