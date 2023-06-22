@@ -82,6 +82,12 @@ und Björn Eberhardt GbR by arrangement with Calliope GbR.
 #define MICROBIT_ID_IO_INT2             131         //INT2
 #define MICROBIT_ID_IO_INT3             132         //INT3
 
+#define MICROBIT_ID_IO_M_A_IN1          152
+#define MICROBIT_ID_IO_M_A_IN2          153
+#define MICROBIT_ID_IO_M_B_IN1          154
+#define MICROBIT_ID_IO_M_B_IN2          155
+#define MICROBIT_ID_IO_M_MODE         156
+
 // System Softwarre components
 #define MICROBIT_ID_PARTIAL_FLASHING                200
 
