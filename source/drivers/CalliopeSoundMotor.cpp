@@ -47,8 +47,8 @@ uint8_t CalliopeSoundMotor::mode;
 CalliopeSoundMotor::CalliopeSoundMotor()
 {
     //init sleep pin
-    nrf_gpio_cfg_output(CALLIOPE_PIN_MOTOR_SLEEP);
-    nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_SLEEP);
+    nrf_gpio_cfg_output(MICROBIT_ID_M_MODE);
+    nrf_gpio_pin_clear(MICROBIT_ID_M_MODE);
 
     //set default values
     duty_motor_percent = CALLIOPE_SM_DEFAULT_DUTY_M;
@@ -79,22 +79,22 @@ CalliopeSoundMotor::~CalliopeSoundMotor()
 //PWM INIT
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//function to init the PWM -> results in a PWM signal and an inverted PWM signal on pins CALLIOPE_PIN_MOTOR_IN2 and CALLIOPE_PIN_MOTOR_IN1
+//function to init the PWM -> results in a PWM signal and an inverted PWM signal on pins MICROBIT_ID_M_A_IN2 and MICROBIT_ID_M_A_IN1
 void CalliopeSoundMotor::PWM_init()
 {
     //init pins
-    nrf_gpio_cfg_output(CALLIOPE_PIN_MOTOR_IN1);
-    nrf_gpio_cfg_output(CALLIOPE_PIN_MOTOR_IN2);
-    nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_IN1);
-    nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_IN2);
+    nrf_gpio_cfg_output(MICROBIT_ID_M_A_IN1);
+    nrf_gpio_cfg_output(MICROBIT_ID_M_A_IN2);
+    nrf_gpio_pin_clear(MICROBIT_ID_M_A_IN1);
+    nrf_gpio_pin_clear(MICROBIT_ID_M_A_IN2);
 
     //create tasks to perform on timer compare match
     NRF_GPIOTE->POWER = 1;
     //task 0
-    nrf_gpiote_task_configure(0, CALLIOPE_PIN_MOTOR_IN1, NRF_GPIOTE_POLARITY_TOGGLE, NRF_GPIOTE_INITIAL_VALUE_LOW);
+    nrf_gpiote_task_configure(0, MICROBIT_ID_M_A_IN1, NRF_GPIOTE_POLARITY_TOGGLE, NRF_GPIOTE_INITIAL_VALUE_LOW);
     nrf_gpiote_task_enable(0);
     //task 1
-    nrf_gpiote_task_configure(1, CALLIOPE_PIN_MOTOR_IN2, NRF_GPIOTE_POLARITY_TOGGLE, NRF_GPIOTE_INITIAL_VALUE_HIGH);
+    nrf_gpiote_task_configure(1, MICROBIT_ID_M_A_IN2, NRF_GPIOTE_POLARITY_TOGGLE, NRF_GPIOTE_INITIAL_VALUE_HIGH);
     nrf_gpiote_task_enable(1);
 
     //Three NOPs are required to make sure configuration is written before setting tasks or getting events
@@ -127,10 +127,10 @@ void CalliopeSoundMotor::PWM_init()
     NRF_TIMER2->TASKS_CLEAR = 1;
 
     //initialize compare registers
-    //set compare registers 0 and 1 (duty cycle for PWM on pins CALLIOPE_PIN_MOTOR_IN1 and CALLIOPE_PIN_MOTOR_IN2)
+    //set compare registers 0 and 1 (duty cycle for PWM on pins MICROBIT_ID_M_A_IN1 and MICROBIT_ID_M_A_IN2)
     NRF_TIMER2->CC[0] = CALLIOPE_SM_PERIOD_M - CALLIOPE_SM_DEFAULT_DUTY_M;
     NRF_TIMER2->CC[1] = CALLIOPE_SM_DEFAULT_DUTY_M-1;
-    //set compare register 2 and 3 (period for PWM on pins CALLIOPE_PIN_MOTOR_IN1 and CALLIOPE_PIN_MOTOR_IN2)
+    //set compare register 2 and 3 (period for PWM on pins MICROBIT_ID_M_A_IN1 and MICROBIT_ID_M_A_IN2)
     NRF_TIMER2->CC[2] = CALLIOPE_SM_PERIOD_M-1;
     NRF_TIMER2->CC[3] = CALLIOPE_SM_PERIOD_M;
     NRF_TIMER2->SHORTS = TIMER_SHORTS_COMPARE3_CLEAR_Msk;
@@ -173,24 +173,24 @@ void CalliopeSoundMotor::motorOn(int8_t duty_percent)
     NRF_TIMER2->CC[3] = CALLIOPE_SM_PERIOD_M;
 
     //activate controller
-    nrf_gpio_pin_set(CALLIOPE_PIN_MOTOR_SLEEP);
+    nrf_gpio_pin_set(MICROBIT_ID_M_MODE);
 
     //set duty
     if(duty_percent == 0) {
-        nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_IN1);
-        nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_IN2);
+        nrf_gpio_pin_clear(MICROBIT_ID_M_A_IN1);
+        nrf_gpio_pin_clear(MICROBIT_ID_M_A_IN2);
     }
 
     else if(duty_percent > 0) {
         if(duty_percent == 100){
             //set pins
-            nrf_gpio_pin_set(CALLIOPE_PIN_MOTOR_IN1);
-            nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_IN2);
+            nrf_gpio_pin_set(MICROBIT_ID_M_A_IN1);
+            nrf_gpio_pin_clear(MICROBIT_ID_M_A_IN2);
         }
         else {
             //set pins for starting pwm again
-            nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_IN1);
-            nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_IN2);
+            nrf_gpio_pin_clear(MICROBIT_ID_M_A_IN1);
+            nrf_gpio_pin_clear(MICROBIT_ID_M_A_IN2);
 
             //set duty cycle
             NRF_TIMER2->CC[0] = NRF_TIMER2->CC[3] - uint16_t((duty_percent * NRF_TIMER2->CC[3]) / 100);
@@ -204,13 +204,13 @@ void CalliopeSoundMotor::motorOn(int8_t duty_percent)
     else if(duty_percent < 0) {
         if(duty_percent == -100){
             //set pins
-            nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_IN1);
-            nrf_gpio_pin_set(CALLIOPE_PIN_MOTOR_IN2);
+            nrf_gpio_pin_clear(MICROBIT_ID_M_A_IN1);
+            nrf_gpio_pin_set(MICROBIT_ID_M_A_IN2);
         }
         else {
             //set pins for starting PWM again
-            nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_IN1);
-            nrf_gpio_pin_set(CALLIOPE_PIN_MOTOR_IN2);
+            nrf_gpio_pin_clear(MICROBIT_ID_M_A_IN1);
+            nrf_gpio_pin_set(MICROBIT_ID_M_A_IN2);
 
             //set duty cycle
             NRF_TIMER2->CC[1] = uint16_t((duty_percent * -1 * NRF_TIMER2->CC[3]) / 100) - 1;
@@ -238,8 +238,8 @@ void CalliopeSoundMotor::motorCoast()
     nrf_gpiote_task_disable(1);
 
     //set pins for motor coast use
-    nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_IN1);
-    nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_IN2);
+    nrf_gpio_pin_clear(MICROBIT_ID_M_A_IN1);
+    nrf_gpio_pin_clear(MICROBIT_ID_M_A_IN2);
 }
 
 
@@ -258,8 +258,8 @@ void CalliopeSoundMotor::motorBreak()
     nrf_gpiote_task_disable(1);
 
     //set pins for motor break use
-    nrf_gpio_pin_set(CALLIOPE_PIN_MOTOR_IN1);
-    nrf_gpio_pin_set(CALLIOPE_PIN_MOTOR_IN2);
+    nrf_gpio_pin_set(MICROBIT_ID_M_A_IN1);
+    nrf_gpio_pin_set(MICROBIT_ID_M_A_IN2);
 }
 
 
@@ -278,11 +278,11 @@ void CalliopeSoundMotor::motorSleep()
     nrf_gpiote_task_disable(1);
 
     //clear pins
-    nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_IN1);
-    nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_IN2);
+    nrf_gpio_pin_clear(MICROBIT_ID_M_A_IN1);
+    nrf_gpio_pin_clear(MICROBIT_ID_M_A_IN2);
 
     //deactivate controller & set mode to off
-    nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_SLEEP);
+    nrf_gpio_pin_clear(MICROBIT_ID_M_MODE);
     mode = 0;
 }
 
@@ -331,13 +331,13 @@ void CalliopeSoundMotor::motorAOn(uint8_t duty_percent)
 
     //values for duty cycle 0
     if((uint8_t(duty_motor_B_percent/2) == 0) || (motor_AB_current_use == 0x01)){
-        nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_IN1);
-        nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_IN2);
+        nrf_gpio_pin_clear(MICROBIT_ID_M_A_IN1);
+        nrf_gpio_pin_clear(MICROBIT_ID_M_A_IN2);
     }
         //else set pins to default values
     else {
-        nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_IN1);
-        nrf_gpio_pin_set(CALLIOPE_PIN_MOTOR_IN2);
+        nrf_gpio_pin_clear(MICROBIT_ID_M_A_IN1);
+        nrf_gpio_pin_set(MICROBIT_ID_M_A_IN2);
     }
 
     //enable task for controlling motor A via PWM if duty > 0
@@ -350,7 +350,7 @@ void CalliopeSoundMotor::motorAOn(uint8_t duty_percent)
     NRF_TIMER2->TASKS_START = 1;
 
     //activate controller
-    nrf_gpio_pin_set(CALLIOPE_PIN_MOTOR_SLEEP);
+    nrf_gpio_pin_set(MICROBIT_ID_M_MODE);
 }
 
 
@@ -394,13 +394,13 @@ void CalliopeSoundMotor::motorBOn(uint8_t duty_percent)
 
     //values for duty cycle 0
     if(uint8_t(duty_motor_B_percent/2) == 0 || (motor_AB_current_use == 0x02)) {
-        nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_IN1);
-        nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_IN2);
+        nrf_gpio_pin_clear(MICROBIT_ID_M_A_IN1);
+        nrf_gpio_pin_clear(MICROBIT_ID_M_A_IN2);
     }
     //else set pins to default values
     else {
-        nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_IN1);
-        nrf_gpio_pin_set(CALLIOPE_PIN_MOTOR_IN2);
+        nrf_gpio_pin_clear(MICROBIT_ID_M_A_IN1);
+        nrf_gpio_pin_set(MICROBIT_ID_M_A_IN2);
     }
 
     //enable task for controlling motor A via PWM if motor A is in use
@@ -413,7 +413,7 @@ void CalliopeSoundMotor::motorBOn(uint8_t duty_percent)
     NRF_TIMER2->TASKS_START = 1;
 
     //activate controller
-    nrf_gpio_pin_set(CALLIOPE_PIN_MOTOR_SLEEP);
+    nrf_gpio_pin_set(MICROBIT_ID_M_MODE);
 }
 
 
@@ -434,11 +434,11 @@ void CalliopeSoundMotor::motorAOff()
     motor_AB_current_use &= ~(0x01);
 
     //PWM setup for motor A
-    nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_IN1);
+    nrf_gpio_pin_clear(MICROBIT_ID_M_A_IN1);
 
     if(motor_AB_current_use == 0) {
         //deactivate controller & set mode to off
-        nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_SLEEP);
+        nrf_gpio_pin_clear(MICROBIT_ID_M_MODE);
         mode = 0;
     }
     else {
@@ -447,7 +447,7 @@ void CalliopeSoundMotor::motorAOff()
 
         if(uint8_t(duty_motor_B_percent/2) != 0) {
             //start value for PWM on IN2
-            nrf_gpio_pin_set(CALLIOPE_PIN_MOTOR_IN2);
+            nrf_gpio_pin_set(MICROBIT_ID_M_A_IN2);
 
             //enable task
             nrf_gpiote_task_enable(1);
@@ -456,7 +456,7 @@ void CalliopeSoundMotor::motorAOff()
             NRF_TIMER2->TASKS_START = 1;
 
             //activate controller
-            nrf_gpio_pin_set(CALLIOPE_PIN_MOTOR_SLEEP);
+            nrf_gpio_pin_set(MICROBIT_ID_M_MODE);
         }
     }
 }
@@ -479,11 +479,11 @@ void CalliopeSoundMotor::motorBOff()
     motor_AB_current_use &= ~(0x02);
 
     //PWM setup for motor B
-    nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_IN2);
+    nrf_gpio_pin_clear(MICROBIT_ID_M_A_IN2);
 
     if(motor_AB_current_use == 0) {
         //deactivate controller & set mode to off
-        nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_SLEEP);
+        nrf_gpio_pin_clear(MICROBIT_ID_M_MODE);
         mode = 0;
     }
     else {
@@ -492,7 +492,7 @@ void CalliopeSoundMotor::motorBOff()
 
         if(uint8_t(duty_motor_A_percent/2) != 0) {
             //start value for PWM on IN1
-            nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_IN1);
+            nrf_gpio_pin_clear(MICROBIT_ID_M_A_IN1);
 
             //enable task
             nrf_gpiote_task_enable(0);
@@ -501,7 +501,7 @@ void CalliopeSoundMotor::motorBOff()
             NRF_TIMER2->TASKS_START = 1;
 
             //activate controller
-            nrf_gpio_pin_set(CALLIOPE_PIN_MOTOR_SLEEP);
+            nrf_gpio_pin_set(MICROBIT_ID_M_MODE);
         }
     }
 }
@@ -539,8 +539,8 @@ void CalliopeSoundMotor::soundOn(uint16_t frequency_hz)
     nrf_gpiote_task_disable(1);
 
     //set pins to default values 
-    nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_IN1);
-    nrf_gpio_pin_set(CALLIOPE_PIN_MOTOR_IN2);
+    nrf_gpio_pin_clear(MICROBIT_ID_M_A_IN1);
+    nrf_gpio_pin_set(MICROBIT_ID_M_A_IN2);
 
     //max 50% duty per pwm just like in dual motor use
     uint8_t duty = uint8_t(CALLIOPE_SM_DEFAULT_DUTY_S/2);
@@ -564,7 +564,7 @@ void CalliopeSoundMotor::soundOn(uint16_t frequency_hz)
     NRF_TIMER2->TASKS_START = 1;
 
     //activate controller
-    nrf_gpio_pin_set(CALLIOPE_PIN_MOTOR_SLEEP);
+    nrf_gpio_pin_set(MICROBIT_ID_M_MODE);
 }
 
 
@@ -585,8 +585,8 @@ void CalliopeSoundMotor::setSoundSilentMode(bool on_off)
     nrf_gpiote_task_disable(1);
 
     //set pins to default values 
-    nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_IN1);
-    nrf_gpio_pin_set(CALLIOPE_PIN_MOTOR_IN2);
+    nrf_gpio_pin_clear(MICROBIT_ID_M_A_IN1);
+    nrf_gpio_pin_set(MICROBIT_ID_M_A_IN2);
 
     //enable task & restart PWM depending on silent mode setting
     nrf_gpiote_task_enable(0);
@@ -610,11 +610,11 @@ void CalliopeSoundMotor::soundOff()
     nrf_gpiote_task_disable(1);
 
     //clear pins
-    nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_IN1);
-    nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_IN2);
+    nrf_gpio_pin_clear(MICROBIT_ID_M_A_IN1);
+    nrf_gpio_pin_clear(MICROBIT_ID_M_A_IN2);
 
     //deactivate controller & set mode to off
-    nrf_gpio_pin_clear(CALLIOPE_PIN_MOTOR_SLEEP);
+    nrf_gpio_pin_clear(MICROBIT_ID_M_MODE);
     mode = 0;
 }
 

@@ -35,7 +35,7 @@ DEALINGS IN THE SOFTWARE.
 //max light intensity
 #define RGB_LED_MAX_INTENSITY               40
 // #ifdef TARGET_NRF51_CALLIOPE
-#define RGB_DEFAULT_PIN CALLIOPE_PIN_RGB_LED
+#define RGB_DEFAULT_PIN MICROBIT_ID_RGB
 // #else
 // #define RGB_DEFAULT_PIN PAD1
 // #endif

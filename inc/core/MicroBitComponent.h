@@ -48,45 +48,39 @@ und Björn Eberhardt GbR by arrangement with Calliope GbR.
 #define MICROBIT_ID_SERIAL              12
 #define MICROBIT_ID_GESTURE             13          // Gesture events
 
-#define MICROBIT_ID_IO_P0               100         //P0 is the left most pad (ANALOG/DIGITAL)  (CM: P1)
-#define MICROBIT_ID_IO_P1               101         //P1 is the middle pad (ANALOG/DIGITAL)     (CM: P2)
-#define MICROBIT_ID_IO_P2               102         //P2 is the right most pad (ANALOG/DIGITAL) (CM: analog/tx)
-#define MICROBIT_ID_IO_P3               103         //COL1 (ANALOG/DIGITAL)
-#define MICROBIT_ID_IO_P4               104         //BTN_A
-#define MICROBIT_ID_IO_P5               105         //COL2 (ANALOG/DIGITAL)
-#define MICROBIT_ID_IO_P6               106         //ROW2
-#define MICROBIT_ID_IO_P7               107         //ROW1
-#define MICROBIT_ID_IO_P8               108         //PIN 18 (CM: analog/tx)
-#define MICROBIT_ID_IO_P9               109         //ROW3
-#define MICROBIT_ID_IO_P10              110         //COL3 (ANALOG/DIGITAL)
-#define MICROBIT_ID_IO_P11              111         //BTN_B
-#define MICROBIT_ID_IO_P12              112         //PIN 20 (CM: P0)
-#define MICROBIT_ID_IO_P13              113         //SCK
-#define MICROBIT_ID_IO_P14              114         //MISO
-#define MICROBIT_ID_IO_P15              115         //MOSI
-#define MICROBIT_ID_IO_P18              118         //
-// #ifdef TARGET_NRF51_CALLIOPE
-#define MICROBIT_ID_IO_A1_RX             116
-#define MICROBIT_ID_IO_A1_TX             117
-#define MICROBIT_ID_IO_A0_SDA            119
-#define MICROBIT_ID_IO_A0_SCL            120
-#define MICROBIT_ID_LOGO                121 // MIC/P21        // CM: analog microphone
-// #else
-// #define MICROBIT_ID_IO_P16              116         //PIN 16 (CM: P3)
-// #define MICROBIT_ID_IO_P17              117         //
-// #define MICROBIT_ID_IO_P19              119         //SCL
-// #define MICROBIT_ID_IO_P20              120         //SDA
-// #endif
+#define MICROBIT_ID_IO_P0               100
+#define MICROBIT_ID_IO_P1               101
+#define MICROBIT_ID_IO_P2               102
+#define MICROBIT_ID_IO_P3               103
+#define MICROBIT_ID_IO_P4               104
+#define MICROBIT_ID_IO_P5               105
+#define MICROBIT_ID_IO_P6               106
+#define MICROBIT_ID_IO_P7               107
+#define MICROBIT_ID_IO_P8               108
+#define MICROBIT_ID_IO_P9               109
+#define MICROBIT_ID_IO_P10              110
+#define MICROBIT_ID_IO_P11              111
+#define MICROBIT_ID_IO_P12              112
+#define MICROBIT_ID_IO_P13              113
+#define MICROBIT_ID_IO_P14              114
+#define MICROBIT_ID_IO_P15              115
+#define MICROBIT_ID_IO_A1_RX            116
+#define MICROBIT_ID_IO_A1_TX            117
+#define MICROBIT_ID_IO_P18              118 // dummy to align with codal / not used in mini 1 & 2
+#define MICROBIT_ID_IO_A0_SCL           119
+#define MICROBIT_ID_IO_A0_SDA           120
+#define MICROBIT_ID_LOGO                121 // MIC
 
 #define MICROBIT_ID_IO_INT1             130         //INT1
 #define MICROBIT_ID_IO_INT2             131         //INT2
 #define MICROBIT_ID_IO_INT3             132         //INT3
 
+#define MICROBIT_ID_IO_RGB              151
 #define MICROBIT_ID_IO_M_A_IN1          152
 #define MICROBIT_ID_IO_M_A_IN2          153
 #define MICROBIT_ID_IO_M_B_IN1          154
 #define MICROBIT_ID_IO_M_B_IN2          155
-#define MICROBIT_ID_IO_M_MODE         156
+#define MICROBIT_ID_IO_M_MODE           156
 
 // System Softwarre components
 #define MICROBIT_ID_PARTIAL_FLASHING                200
