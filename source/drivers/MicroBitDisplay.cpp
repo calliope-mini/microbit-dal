@@ -354,7 +354,7 @@ void MicroBitDisplay::updateScrollText()
 void MicroBitDisplay::updatePrintText()
 {
     image.print(printingChar < printingText.length() ? printingText.charAt(printingChar) : ' ',0,0);
-    if (printingChar >= printingText.length())
+    if (printingChar > printingText.length())
     {
         animationMode = ANIMATION_MODE_NONE;
 
@@ -447,7 +447,7 @@ void MicroBitDisplay::stopAnimation()
 void MicroBitDisplay::waitForFreeDisplay()
 {
     // If there's an ongoing animation, wait for our turn to display.
-    while (animationMode != ANIMATION_MODE_NONE && animationMode != ANIMATION_MODE_STOPPED)
+    if (animationMode != ANIMATION_MODE_NONE && animationMode != ANIMATION_MODE_STOPPED)
         fiber_wait_for_event(MICROBIT_ID_NOTIFY, MICROBIT_DISPLAY_EVT_FREE);
 }
 
@@ -532,7 +532,7 @@ int MicroBitDisplay::printAsync(ManagedString s, int delay)
         printingChar = 0;
         printingText = s;
         animationDelay = delay;
-        animationTick = delay-1;
+        animationTick = 0;
 
         animationMode = ANIMATION_MODE_PRINT_TEXT;
     }

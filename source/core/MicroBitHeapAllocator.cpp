@@ -173,14 +173,6 @@ int microbit_create_heap(uint32_t start, uint32_t end)
     return MICROBIT_OK;
 }
 
-uint32_t device_heap_size(uint8_t heap_index)
-{
-    if (heap_index >= heap_count)
-        return 0;    
-    HeapDefinition *h = &heap[heap_index];
-    return (uint8_t*)h->heap_end - (uint8_t*)h->heap_start;
-}
-
 /**
   * Attempt to allocate a given amount of memory from a given heap area.
   *
@@ -279,13 +271,10 @@ void *microbit_malloc(size_t size, HeapDefinition &heap)
   *
   * @return A pointer to the allocated memory, or NULL if insufficient memory is available.
   */
-void *microbit_alloc(size_t size)
+void *malloc(size_t size)
 {
     static uint8_t initialised = 0;
     void *p;
-
-    if (size == 0)
-        return NULL;
 
     if (!initialised)
     {
@@ -330,7 +319,7 @@ void *microbit_alloc(size_t size)
   *
   * @param mem The memory area to release.
   */
-void microbit_free(void *mem)
+void free(void *mem)
 {
 	uint32_t	*memory = (uint32_t *)mem;
 	uint32_t	*cb = memory-1;
@@ -366,17 +355,13 @@ void* calloc (size_t num, size_t size)
 {
     void *mem = malloc(num*size);
 
-    if (mem) {
-        // without this write, GCC will happily optimize malloc() above into calloc()
-        // and remove the memset
-        ((uint32_t*)mem)[0] = 1;
-        memset(mem, 0, num*size);
-    }
+    if (mem)
+            memclr(mem, num*size);
 
     return mem;
 }
 
-void* microbit_realloc (void* ptr, size_t size)
+void* realloc (void* ptr, size_t size)
 {
     void *mem = malloc(size);
 
@@ -394,10 +379,6 @@ void* microbit_realloc (void* ptr, size_t size)
 
     return mem;
 }
-
-void *malloc(size_t sz) __attribute__ ((weak, alias ("microbit_alloc")));
-void free(void *mem) __attribute__ ((weak, alias ("microbit_free")));
-void* realloc (void* ptr, size_t size) __attribute__ ((weak, alias ("microbit_realloc")));
 
 // make sure the libc allocator is not pulled in
 void *_malloc_r(struct _reent *, size_t len)

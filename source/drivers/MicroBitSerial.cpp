@@ -295,7 +295,7 @@ void MicroBitSerial::send(MicroBitSerialMode mode)
         while(txBufferedSize() > 0);
 
     if(mode == SYNC_SLEEP)
-        schedule();
+        fiber_sleep(0);
 }
 
 /**
