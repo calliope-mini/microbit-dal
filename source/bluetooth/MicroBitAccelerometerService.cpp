@@ -73,7 +73,7 @@ MicroBitAccelerometerService::MicroBitAccelerometerService(BLEDevice &_ble, Micr
     ble.onDataWritten(this, &MicroBitAccelerometerService::onDataWritten);
 
     if (EventModel::defaultEventBus)
-        EventModel::defaultEventBus->listen(MICROBIT_ID_ACCELEROMETER, MICROBIT_ACCELEROMETER_EVT_DATA_UPDATE, this, &MicroBitAccelerometerService::accelerometerUpdate,  MESSAGE_BUS_LISTENER_IMMEDIATE);
+        EventModel::defaultEventBus->listen(MICROBIT_ID_ACCELEROMETER, MICROBIT_ACCELEROMETER_EVT_DATA_UPDATE, this, &MicroBitAccelerometerService::accelerometerUpdate/*,  MESSAGE_BUS_LISTENER_IMMEDIATE*/);
 }
 
 /**

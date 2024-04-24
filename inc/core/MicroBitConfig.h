@@ -362,6 +362,10 @@ extern uint32_t __etext;
 #define MICROBIT_RADIO_UPPER_FREQ_BAND 83
 #endif
 
+#ifndef MICROBIT_RADIO_MAXIMUM_RX_BUFFERS
+#define MICROBIT_RADIO_MAXIMUM_RX_BUFFERS 4
+#endif
+
 //
 // Accelerometer options
 //

@@ -21,6 +21,11 @@ THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
+
+========================
+Modifications Copyright (c) 2016 Calliope GbR
+Modifications are provided by DELTA Systems (Georg Sommer) - Thomas Kern
+und Björn Eberhardt GbR by arrangement with Calliope GbR.
 */
 
 #ifndef MICROBIT_IO_H
@@ -41,25 +46,35 @@ class MicroBitIO
     public:
 
 	MicroBitPin			 pin[0];
-	MicroBitPin          P0;
-    MicroBitPin          P1;
-    MicroBitPin          P2;
-    MicroBitPin          P3;
-    MicroBitPin          P4;
-    MicroBitPin          P5;
-    MicroBitPin          P6;
-    MicroBitPin          P7;
-    MicroBitPin          P8;
-    MicroBitPin          P9;
-    MicroBitPin          P10;
-    MicroBitPin          P11;
-    MicroBitPin          P12;
-    MicroBitPin          P13;
-    MicroBitPin          P14;
-    MicroBitPin          P15;
-    MicroBitPin          P16;
-    MicroBitPin          P19;
-    MicroBitPin          P20;
+  MicroBitPin          P0;
+  MicroBitPin          P1;
+  MicroBitPin          P2;
+  MicroBitPin          P3;
+  MicroBitPin          P4;
+  MicroBitPin          P5;
+  MicroBitPin          P6;
+  MicroBitPin          P7;
+  MicroBitPin          P8;
+  MicroBitPin          P9;
+  MicroBitPin          P10;
+  MicroBitPin          P11;
+  MicroBitPin          P12;
+  MicroBitPin          P13;
+  MicroBitPin          P14;
+  MicroBitPin          P15;
+
+// #ifdef TARGET_NRF51_CALLIOPE
+  MicroBitPin          A0SCL;
+  MicroBitPin          A0SDA;
+  MicroBitPin          A1RX;
+  MicroBitPin          A1TX;
+  MicroBitPin          MICROPHONE;
+// #else
+//     
+//     MicroBitPin          P16;
+//     MicroBitPin          P19;
+//     MicroBitPin          P20;
+// #endif
 
     /**
       * Constructor.
@@ -74,8 +89,17 @@ class MicroBitIO
                int ID_P6, int ID_P7, int ID_P8,
                int ID_P9, int ID_P10,int ID_P11,
                int ID_P12,int ID_P13,int ID_P14,
-               int ID_P15,int ID_P16,int ID_P19,
-               int ID_P20);
+               int ID_P15,
+// #ifdef TARGET_NRF51_CALLIOPE
+              int ID_A0SCL,
+              int ID_A0SDA,
+              int ID_A1RX,
+              int ID_A1TX,
+              int ID_MIC
+// #else
+
+// #endif
+	 );
 };
 
 #endif

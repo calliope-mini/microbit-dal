@@ -187,6 +187,11 @@ class MicroBitCompass : public MicroBitComponent
          */
         void clearCalibration();
 
+        /**
+         * Assumes the calibration held in persistent storage, and sets the calibrated flag to 1.
+         */
+        void assumeCalibration();
+
 
         /**
          * Configures the device for the sample rate defined
