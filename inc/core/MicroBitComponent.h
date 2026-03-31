@@ -59,7 +59,8 @@ DEALINGS IN THE SOFTWARE.
 #define MICROBIT_ID_IO_P13              113         //SCK
 #define MICROBIT_ID_IO_P14              114         //MISO
 #define MICROBIT_ID_IO_P15              115         //MOSI
-#define MICROBIT_ID_IO_P16              116         //PIN 16
+#define MICROBIT_ID_IO_P16              116         //UART_RX
+#define MICROBIT_ID_IO_P17              117         //UART_TX
 #define MICROBIT_ID_IO_P19              119         //SCL
 #define MICROBIT_ID_IO_P20              120         //SDA
 
