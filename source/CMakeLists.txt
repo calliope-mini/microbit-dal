@@ -66,6 +66,9 @@ set(YOTTA_AUTO_MICROBIT-DAL_CPP_FILES
     "bluetooth/MicroBitUARTService.cpp"
     "bluetooth/MicroBitPartialFlashingService.cpp"
 
+    "drivers/CalliopeRGB.cpp"
+
+
 )
 
 execute_process(WORKING_DIRECTORY "../../yotta_modules/${PROJECT_NAME}" COMMAND "git" "log" "--pretty=format:%h" "-n" "1" OUTPUT_VARIABLE git_hash)
