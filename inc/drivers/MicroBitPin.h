@@ -59,6 +59,11 @@ DEALINGS IN THE SOFTWARE.
 #define MICROBIT_PIN_P17                    P0_27       //UART_TX (ANALOG)
 #define MICROBIT_PIN_P19                    P0_19       //I2C_SCL
 #define MICROBIT_PIN_P20                    P0_20       //I2C_SDA
+#define MICROBIT_PIN_RGB                    P0_18       //RGB LED (WS2812b)
+#define MICROBIT_PIN_MIC                    P0_3        //Microphone (ANALOG)
+#define MICROBIT_PIN_MOTOR_SLEEP            P0_28       //Motor driver SLEEP
+#define MICROBIT_PIN_MOTOR_IN1              P0_29       //Motor driver IN1
+#define MICROBIT_PIN_MOTOR_IN2              P0_30       //Motor driver IN2
 
 #define MICROBIT_PIN_MAX_OUTPUT             1023
 

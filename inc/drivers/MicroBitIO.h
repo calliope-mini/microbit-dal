@@ -61,6 +61,11 @@ class MicroBitIO
     MicroBitPin          P17;
     MicroBitPin          P19;
     MicroBitPin          P20;
+    MicroBitPin          RGB;
+    MicroBitPin          MIC;
+    MicroBitPin          MOTOR_SLEEP;
+    MicroBitPin          MOTOR_IN1;
+    MicroBitPin          MOTOR_IN2;
 
     /**
       * Constructor.
@@ -76,7 +81,8 @@ class MicroBitIO
                int ID_P9, int ID_P10,int ID_P11,
                int ID_P12,int ID_P13,int ID_P14,
                int ID_P15,int ID_P16,int ID_P17,
-               int ID_P19,int ID_P20);
+               int ID_P19,int ID_P20,
+               int ID_RGB,int ID_MIC,int ID_MOTOR_SLEEP,int ID_MOTOR_IN1,int ID_MOTOR_IN2);
 };
 
 #endif

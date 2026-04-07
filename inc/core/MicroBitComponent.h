@@ -63,6 +63,13 @@ DEALINGS IN THE SOFTWARE.
 #define MICROBIT_ID_IO_P17              117         //UART_TX
 #define MICROBIT_ID_IO_P19              119         //SCL
 #define MICROBIT_ID_IO_P20              120         //SDA
+#define MICROBIT_ID_IO_RGB              121         //RGB LED
+#define MICROBIT_ID_IO_MIC              122         //Microphone
+#define MICROBIT_ID_IO_MOTOR_SLEEP      123         //Motor driver SLEEP
+#define MICROBIT_ID_IO_MOTOR_IN1        124         //Motor driver IN1
+#define MICROBIT_ID_IO_MOTOR_IN2        125         //Motor driver IN2
+#define MICROBIT_ID_IO_MOTOR_IN1        123         //Motor driver IN1
+#define MICROBIT_ID_IO_MOTOR_IN2        124         //Motor driver IN2
 
 #define MICROBIT_ID_IO_INT1             130         //INT1
 #define MICROBIT_ID_IO_INT2             131         //INT2
