@@ -29,9 +29,10 @@ DEALINGS IN THE SOFTWARE.
 #include "MicroBitFiber.h"
 #include "MicroBitDevice.h"
 
-#include "MAG3110.h"
-#include "LSM303Magnetometer.h"
-#include "FXOS8700.h"
+//#include "MAG3110.h"            // not on Calliope
+//#include "LSM303Magnetometer.h" // not on Calliope
+//#include "FXOS8700.h"           // not on Calliope
+#include "BMX055Magnetometer.h"
 
 //
 // Internal convenience macro to apply calibration to a given sample.
@@ -102,32 +103,24 @@ MicroBitCompass& MicroBitCompass::autoDetect(MicroBitI2C &i2c)
 {
     if (MicroBitCompass::detectedCompass == NULL)
     {
-        // Configuration of IRQ lines
-        MicroBitPin int1(MICROBIT_ID_IO_INT1, P0_28, PIN_CAPABILITY_STANDARD);
-        MicroBitPin int2(MICROBIT_ID_IO_INT2, P0_29, PIN_CAPABILITY_STANDARD);
-        MicroBitPin int3(MICROBIT_ID_IO_INT3, P0_27, PIN_CAPABILITY_STANDARD);
+        // Calliope mini: BMX055 magnetometer shares INT with accelerometer on p21
+        MicroBitPin int1(MICROBIT_ID_IO_INT1, P0_21, PIN_CAPABILITY_STANDARD);
 
         // All known accelerometer/magnetometer peripherals have the same alignment
         CoordinateSpace &coordinateSpace = *(new CoordinateSpace(SIMPLE_CARTESIAN, true, COORDINATE_SPACE_ROTATED_0));
 
-        // Now, probe for connected peripherals, if none have already been found.
-        if (MAG3110::isDetected(i2c))
-            MicroBitCompass::detectedCompass = new MAG3110(i2c, int2, coordinateSpace);
+        // Probe for BMX055 magnetometer (Calliope mini)
+        if (BMX055Magnetometer::isDetected(i2c))
+            MicroBitCompass::detectedCompass = new BMX055Magnetometer(i2c, int1, coordinateSpace);
 
-        else if (LSM303Magnetometer::isDetected(i2c))
-            MicroBitCompass::detectedCompass = new LSM303Magnetometer(i2c, int2, coordinateSpace);
-
-        else if (FXOS8700::isDetected(i2c))
-        {
-            FXOS8700 *fxos =  new FXOS8700(i2c, int3, coordinateSpace);
-            MicroBitAccelerometer::detectedAccelerometer = fxos;
-            MicroBitCompass::detectedCompass = fxos;
-        }
-
-        // Insert this case to support FXOS on the microbit1.5-SN
-        //else if (FXOS8700::isDetected(i2c, 0x3A))
+        // micro:bit sensors (not on Calliope):
+        //else if (MAG3110::isDetected(i2c))
+        //    MicroBitCompass::detectedCompass = new MAG3110(i2c, int1, coordinateSpace);
+        //else if (LSM303Magnetometer::isDetected(i2c))
+        //    MicroBitCompass::detectedCompass = new LSM303Magnetometer(i2c, int1, coordinateSpace);
+        //else if (FXOS8700::isDetected(i2c))
         //{
-        //    FXOS8700 *fxos =  new FXOS8700(i2c, int3, coordinateSpace, 0x3A);
+        //    FXOS8700 *fxos = new FXOS8700(i2c, int1, coordinateSpace);
         //    MicroBitAccelerometer::detectedAccelerometer = fxos;
         //    MicroBitCompass::detectedCompass = fxos;
         //}

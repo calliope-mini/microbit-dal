@@ -46,11 +46,13 @@ set(YOTTA_AUTO_MICROBIT-DAL_CPP_FILES
     "drivers/MicroBitFlash.cpp"
     "drivers/MicroBitFile.cpp"
     "drivers/MicroBitFileSystem.cpp"
-    "drivers/FXOS8700.cpp"
-    "drivers/MMA8653.cpp"
-    "drivers/MAG3110.cpp"
-    "drivers/LSM303Accelerometer.cpp"
-    "drivers/LSM303Magnetometer.cpp"
+    # "drivers/FXOS8700.cpp"          # not on Calliope
+    # "drivers/MMA8653.cpp"           # not on Calliope
+    # "drivers/MAG3110.cpp"           # not on Calliope
+    # "drivers/LSM303Accelerometer.cpp" # not on Calliope
+    # "drivers/LSM303Magnetometer.cpp"  # not on Calliope
+    "drivers/BMX055Accelerometer.cpp"
+    "drivers/BMX055Magnetometer.cpp"
     "drivers/MicroBitMemoryMap.cpp"
 
     "bluetooth/MicroBitAccelerometerService.cpp"
