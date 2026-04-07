@@ -68,8 +68,6 @@ DEALINGS IN THE SOFTWARE.
 #define MICROBIT_ID_IO_MOTOR_SLEEP      123         //Motor driver SLEEP
 #define MICROBIT_ID_IO_MOTOR_IN1        124         //Motor driver IN1
 #define MICROBIT_ID_IO_MOTOR_IN2        125         //Motor driver IN2
-#define MICROBIT_ID_IO_MOTOR_IN1        123         //Motor driver IN1
-#define MICROBIT_ID_IO_MOTOR_IN2        124         //Motor driver IN2
 
 #define MICROBIT_ID_IO_INT1             130         //INT1
 #define MICROBIT_ID_IO_INT2             131         //INT2
