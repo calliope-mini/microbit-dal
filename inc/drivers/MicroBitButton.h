@@ -33,7 +33,10 @@ DEALINGS IN THE SOFTWARE.
 
 #define MICROBIT_PIN_BUTTON_A                   P0_17
 #define MICROBIT_PIN_BUTTON_B                   P0_16       // Calliope mini
-// #define MICROBIT_PIN_BUTTON_RESET               P0_19       // unused on Calliope (P0_19 = I2C SCL; resetButton removed)
+#define MICROBIT_PIN_BUTTON_A                   P0_17
+#define MICROBIT_PIN_BUTTON_B                   P0_16       // Calliope mini
+#define MICROBIT_PIN_BUTTON_RESET               P0_19       // unused on Calliope (P0_19 = I2C SCL)
+#define CALLIOPE_NO_RESET_BUTTON                            // Calliope has no GPIO reset button
 
 #define MICROBIT_BUTTON_EVT_DOWN                1
 #define MICROBIT_BUTTON_EVT_UP                  2
