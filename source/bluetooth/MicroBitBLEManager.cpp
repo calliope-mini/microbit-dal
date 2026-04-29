@@ -794,7 +794,7 @@ void MicroBitBLEManager::showManagementModeAnimation(MicroBitDisplay &display)
     };
 
     MicroBitImage mgmt((ImageData*)mgmt_animation);
-    display.animate(mgmt,100,5);
+    display.animate(mgmt,50,5);
 
     const uint8_t bt_icon_raw[] =
     {
@@ -812,7 +812,7 @@ void MicroBitBLEManager::showManagementModeAnimation(MicroBitDisplay &display)
         display.setBrightness(i);
         fiber_sleep(5);
     }
-    fiber_sleep(1000);
+    fiber_sleep(300);
 
 }
 
