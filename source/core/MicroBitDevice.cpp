@@ -216,7 +216,7 @@ void microbit_panic(int statusCode)
             {
                 uint32_t col_data = 0;
 
-                int i = 0;
+                volatile int i = 0; // volatile: keeps the burn-cycle delay loop below from being optimised out when the reset-button check is compiled out on Calliope
 
                 //if we have hit the row limit - reset both the bit mask and the row variable
                 if(strobeRow == microbitMatrixMap.rows)
