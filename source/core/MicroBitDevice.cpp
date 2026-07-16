@@ -77,6 +77,17 @@ bool ble_running()
 }
 
 /**
+ * Determine the amount of physical RAM fitted to this device, read directly
+ * from the nrf51's FICR (Factory Information Configuration Registers).
+ *
+ * @return the amount of RAM fitted, in bytes.
+ */
+uint32_t microbit_ram_size()
+{
+    return NRF_FICR->NUMRAMBLOCK * NRF_FICR->SIZERAMBLOCKS;
+}
+
+/**
  * Derive a unique, consistent serial number of this device from internal data.
  *
  * @return the serial number of this device.

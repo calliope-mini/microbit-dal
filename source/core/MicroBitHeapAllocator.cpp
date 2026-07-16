@@ -222,11 +222,8 @@ void *microbit_malloc(size_t size, HeapDefinition &heap)
 		// We have a free block. Let's see if the subsequent ones are too. If so, we can merge...
 		next = block + blockSize;
 
-		while (*next & MICROBIT_HEAP_BLOCK_FREE)
+		while (next < heap.heap_end && (*next & MICROBIT_HEAP_BLOCK_FREE))
 		{
-			if (next >= heap.heap_end)
-				break;
-
 			// We can merge!
 			blockSize += (*next & ~MICROBIT_HEAP_BLOCK_FREE);
 			*block = blockSize | MICROBIT_HEAP_BLOCK_FREE;

@@ -49,6 +49,16 @@ DEALINGS IN THE SOFTWARE.
 bool ble_running();
 
 /**
+ * Determine the amount of physical RAM fitted to this device, read directly
+ * from the nrf51's FICR (Factory Information Configuration Registers).
+ * Used to distinguish 16KB RAM chips (e.g. microbit v1) from 32KB (v2) at
+ * runtime, since both can run the same compiled binary.
+ *
+ * @return the amount of RAM fitted, in bytes.
+ */
+uint32_t microbit_ram_size();
+
+/**
  * Derive a unique, consistent serial number of this device from internal data.
  *
  * @return the serial number of this device.

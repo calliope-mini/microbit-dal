@@ -73,7 +73,7 @@ uint32_t btle_set_gatt_table_size(uint32_t size);
 #define SECURITY_MODE_IS(x) (SECURITY_MODE(MICROBIT_BLE_SECURITY_LEVEL) == SECURITY_MODE(x))
 
 const char *MICROBIT_BLE_MANUFACTURER = NULL;
-const char *MICROBIT_BLE_MODEL = "BBC micro:bit";
+const char *MICROBIT_BLE_MODEL = "Calliope mini";
 const char *MICROBIT_BLE_HARDWARE_VERSION = NULL;
 const char *MICROBIT_BLE_FIRMWARE_VERSION = MICROBIT_DAL_VERSION;
 const char *MICROBIT_BLE_SOFTWARE_VERSION = NULL;
@@ -783,18 +783,12 @@ void MicroBitBLEManager::showManagementModeAnimation(MicroBitDisplay &display)
     // Animation for display object
     // https://makecode.microbit.org/93264-81126-90471-58367
 
-    const uint8_t mgmt_animation[] __attribute__ ((aligned (4))) =
-    {
-         0xff, 0xff, 20, 0, 5, 0,
-         255,255,255,255,255,   255,255,255,255,255,   255,255,  0,255,255,   255,  0,  0,  0,255,
-         255,255,255,255,255,   255,255,  0,255,255,   255,  0,  0,  0,255,     0,  0,  0,  0,  0,
-         255,255,  0,255,255,   255,  0,  0,  0,255,     0,  0,  0,  0,  0,     0,  0,  0,  0,  0,
-         255,255,255,255,255,   255,255,  0,255,255,   255,  0,  0,  0,255,     0,  0,  0,  0,  0,
-         255,255,255,255,255,   255,255,255,255,255,   255,255,  0,255,255,   255,  0,  0,  0,255
-    };
+    for(int i=0; i < 255; i = i + 5){
+        display.setBrightness(255-i);
+        fiber_sleep(2);
+    }
 
-    MicroBitImage mgmt((ImageData*)mgmt_animation);
-    display.animate(mgmt,50,5);
+    display.clear();
 
     const uint8_t bt_icon_raw[] =
     {
@@ -810,7 +804,7 @@ void MicroBitBLEManager::showManagementModeAnimation(MicroBitDisplay &display)
 
     for(int i=0; i < 255; i = i + 5){
         display.setBrightness(i);
-        fiber_sleep(5);
+        fiber_sleep(2);
     }
     fiber_sleep(300);
 

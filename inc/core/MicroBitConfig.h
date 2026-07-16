@@ -237,6 +237,15 @@ extern uint32_t __etext;
 #define MICROBIT_BLE_ENABLED                    1
 #endif
 
+// 16KB RAM devices (e.g. microbit v1) are extremely tight on memory once the
+// BLE stack and its GATT table are resident alongside user code, and are
+// prone to out-of-memory failures. MICROBIT_BLE_ENABLED is therefore ignored
+// at runtime on such devices unless this option is set to '1', in which case
+// BLE is started regardless of the amount of RAM detected.
+#ifndef MICROBIT_BLE_FORCE_ENABLE_16KB
+#define MICROBIT_BLE_FORCE_ENABLE_16KB          0
+#endif
+
 // Enable/Disable BLE pairing mode mode at power up.
 // Set '1' to enable.
 #ifndef MICROBIT_BLE_PAIRING_MODE

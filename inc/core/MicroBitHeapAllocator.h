@@ -54,7 +54,7 @@ DEALINGS IN THE SOFTWARE.
 #include "MicroBitConfig.h"
 
 // The maximum number of heap segments that can be created.
-#define MICROBIT_MAXIMUM_HEAPS          2
+#define MICROBIT_MAXIMUM_HEAPS          3 // to be able to create one extra for Calliope mini v2
 
 // Flag to indicate that a given block is FREE/USED (top bit of a CPU word)
 #define MICROBIT_HEAP_BLOCK_FREE		0x80000000
@@ -93,7 +93,7 @@ void microbit_heap_print();
  * 
  * @return the size of heap in bytes, or zero if no such heap exists.
  */
-uint32_t microbit_heap_size(uint8_t heap_index);
+uint32_t device_heap_size(uint8_t heap_index);
 
 /**
   * Attempt to allocate a given amount of memory from any of our configured heap areas.
