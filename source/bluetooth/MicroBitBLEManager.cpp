@@ -296,7 +296,7 @@ void MicroBitBLEManager::deferredSysAttrWrite(Gap::Handle_t handle)
   */
 void MicroBitBLEManager::init(ManagedString deviceName, ManagedString serialNumber, EventModel &messageBus, bool enableBonding)
 {
-    ManagedString BLEName("BBC micro:bit");
+    ManagedString BLEName("Calliope mini");
     this->deviceName = deviceName;
 
 #if !(CONFIG_ENABLED(MICROBIT_BLE_WHITELIST))
@@ -644,7 +644,7 @@ void MicroBitBLEManager::pairingMode(MicroBitDisplay &display, MicroBitButton &a
     // Do not page this fiber!
     currentFiber->flags |= MICROBIT_FIBER_FLAG_DO_NOT_PAGE;
         
-    ManagedString namePrefix("BBC micro:bit [");
+    ManagedString namePrefix("Calliope mini [");
     ManagedString namePostfix("]");
     ManagedString BLEName = namePrefix + deviceName + namePostfix;
 
