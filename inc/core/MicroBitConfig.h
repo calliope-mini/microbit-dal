@@ -132,6 +132,18 @@ extern uint32_t __etext;
 #define MICROBIT_HEAP_REUSE_SD                  1
 #endif
 
+// Make a 32KB RAM device (e.g. Calliope mini v2) behave like a 16KB device
+// (mini v1) for testing/compatibility. Set '1' to simulate mini v1 on mini v2:
+//  - skip powering the extra 16KB of physical RAM above MICROBIT_SRAM_END and
+//    registering it as a third heap region (see MicroBit.cpp), and
+//  - drop the runtime RAM-size gate on BLE bring-up, so BLE is not deactivated
+//    by the simulated 16KB size (see MicroBit.cpp).
+// Leave at '0' to use all physical RAM and the normal per-chip behaviour. Set
+// via yotta config microbit-dal.simulate_mini1_on_mini2.
+#ifndef MICROBIT_SIMULATE_MINI1_ON_MINI2
+#define MICROBIT_SIMULATE_MINI1_ON_MINI2        0
+#endif
+
 // The amount of memory allocated to Soft Device to hold its BLE GATT table.
 // For standard S110 builds, this should be word aligned and in the range 0x300 - 0x700.
 // Any unused memory will be automatically reclaimed as HEAP memory if both MICROBIT_HEAP_REUSE_SD and MICROBIT_HEAP_ALLOCATOR are enabled.
