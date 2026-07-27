@@ -254,8 +254,8 @@ extern uint32_t __etext;
 // prone to out-of-memory failures. MICROBIT_BLE_ENABLED is therefore ignored
 // at runtime on such devices unless this option is set to '1', in which case
 // BLE is started regardless of the amount of RAM detected.
-#ifndef MICROBIT_BLE_FORCE_ENABLE_16KB
-#define MICROBIT_BLE_FORCE_ENABLE_16KB          0
+#ifndef MICROBIT_BLE_FORCE_ENABLED_16KB
+#define MICROBIT_BLE_FORCE_ENABLED_16KB              0
 #endif
 
 // Enable/Disable BLE pairing mode mode at power up.
